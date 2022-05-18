@@ -52,8 +52,6 @@ def main():
     print("Thank you, the program has ended")
 
 
-
 if __name__ == "__main__":
-
     main()
 
