@@ -12,26 +12,39 @@ def review_fruit(l):
         print(output)
     return None
 
+def add_new_entry(l):
+    #print("Start adding new fruit")
+    fruit_name = get_string("Please enter the new fruit: ")
+    fruit_number = get_string("Please enter the number of fruit: ")
+    new_list = [fruit_name, fruit_number]
+    l.append(new_list)
+    #return None
+
+
 def main():
     fruit_list = [
         ["Apple", 2],
         ["Banana", 5],
         ["Pears", 0],
         ["Lemons", 7]]
-    menu_list=[
+    menu_list = [
         ["R", "Review fruit"],
+        ["A", "Add new fruit"],
         ["Q", "Quit"]
         ]
+    #add_new_entry(fruit_list)
+
     run_program=True
-    print(menu_list)
     while run_program:
         for x in menu_list:
-            output = "{} -- {}".format(x[0], x[1])
+            output = "{} -- {} ".format(x[0], x[1])
             print(output)
         user_choice = get_string("Please select an option: ->").upper()
         print(user_choice)
         if user_choice == "R":
             print(fruit_list)
+        elif user_choice == "A":
+            run_program ==(add_new_entry(fruit_list))
         elif user_choice == "Q":
             run_program = False
         else:
