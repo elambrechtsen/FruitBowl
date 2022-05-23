@@ -23,7 +23,7 @@ def print_with_indexes(l):
 
 def add_new_entry(l):
     #print("Start adding new fruit")
-    fruit_name = get_integer("Please enter the new fruit: ")
+    fruit_name = get_string("Please enter the new fruit: ")
     fruit_number = get_integer("Please enter the number of fruit: ")
     new_list = [fruit_name, fruit_number]
     l.append(new_list)
@@ -59,18 +59,25 @@ def update_fruit(l):
     output_message = "{} many has now been changed to {}".format(old_fruit, new_fruit)
     print(output_message)
 
+def count_fruit(l):
+    total = 0
+    for x in l:
+        total += x[1]
+    print(total)
+
 def main():
     fruit_list = [
         ["Apple", 2],
         ["Banana", 5],
-        ["Pears", 0],
-        ["Lemons", 7]]
+        ["Pear", 0],
+        ["Lemon", 7]]
     menu_list = [
         ["R", "Review fruit"],
         ["N", "New type of fruit"],
-        ["C", "Change quantity of fruit"],
+        ["Q", "Change quantity of fruit"],
         ["A", "Add more fruit"],
         ["E", "Eat fruit"],
+        ["C", "Count fruit in bowl"],
         ["Q", "Quit"]
         ]
     #add_new_entry(fruit_list)
@@ -86,19 +93,19 @@ def main():
             print(fruit_list)
         elif user_choice == "N":
             run_program ==(add_new_entry(fruit_list))
-        elif user_choice == "C":
+        elif user_choice == "Q":
             run_program ==(update_fruit(fruit_list))
         elif user_choice == "A":
             run_program ==(add_fruit(fruit_list))
         elif user_choice == "E":
             run_program == (eat_fruit(fruit_list))
+        elif user_choice == "C":
+            run_program == (count_fruit(fruit_list))
         elif user_choice == "Q":
             run_program = False
         else:
             print("Unrecognised entry")
     print("Thank you, the program has ended")
 
-
 if __name__ == "__main__":
     main()
-
