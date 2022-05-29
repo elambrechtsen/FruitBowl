@@ -4,11 +4,23 @@ def get_integer(m):
             my_integer = int(input(m))
             return my_integer
         except:
-            print("Invalid entry")
+            print("Invalid entry, re-read the question")
 
 def get_string(m):
     my_string = input(m)
     return my_string
+
+def get_integer_limits(m, a, b):
+    while True:
+        try:
+            my_integer = int(input(m))
+        except:
+            print("Invalid entry")
+            continue
+        if my_integer < a or my_integer > b:
+            print("Not in correct range")
+        else:
+            return my_integer
 
 def review_fruit(l):
     for x in l:
@@ -22,12 +34,16 @@ def print_with_indexes(l):
         print(output)
 
 def add_new_entry(l):
-    #print("Start adding new fruit")
-    fruit_name = get_string("Please enter the new fruit: ")
+    fruit_name = get_string("Please enter the new fruit: ").title()
+    for x in l:
+        if fruit_name == x[0]:
+            output = "This fruit is already in the list please add to the existing amount"
+            print(output)
+            return None
     fruit_number = get_integer("Please enter the number of fruit: ")
     new_list = [fruit_name, fruit_number]
     l.append(new_list)
-    #return None
+    return None
 
 def add_fruit(l):
     print_with_indexes(l)
@@ -38,14 +54,29 @@ def add_fruit(l):
     l[user_choice][1] += quantity
     print("There has been {} more {}s added to the fruit bowl".format(quantity, fruit_name))
 
-def eat_fruit(l):
-    print_with_indexes(l)
-    user_choice = get_integer("Which option would you like to change: ")
-    fruit_name = l[user_choice][0]
-    fruit_quantity = l[user_choice][1]
-    quantity = get_integer("How many {} would you like to eat: ".format(fruit_name))
-    l[user_choice][1] -= quantity
-    print("There has been {} {}s eaten out of the fruit bowl".format(quantity, fruit_name))
+
+def remove_fruit(L):
+    print_with_indexes(L)
+    my_index = get_integer("Choose index number to update the fruit quantity")
+    print()
+    old_amount = L[my_index][1]
+    number = get_integer_limits("Enter how many you would like to remove:", 0, old_amount)
+    print()
+    new_amount = old_amount - number
+    print("{} - {} = {} left in the bowl".format(old_amount, number, new_amount))
+    print()
+    output_message = "The number of {} {} has been updated to {}.".format(old_amount, L[my_index][0], new_amount)
+    print(output_message)
+
+#def eat_fruit(l):
+    #print_with_indexes(l)
+    #user_choice = get_integer("Which option would you like to change: ")
+    #fruit_name = l[user_choice][0]
+    #fruit_quantity = l[user_choice][1]
+    #old_amount = l[0]
+    #quantity = get_integer_limits("How many {} would you like to eat: ", 0, old_amount.format(fruit_name))
+    #l[user_choice][1] -= quantity
+    #print("There has been {} {}s eaten out of the fruit bowl",.format(quantity, fruit_name))
 
 
 def update_fruit(l):
@@ -78,7 +109,7 @@ def main():
         ["A", "Add more fruit"],
         ["E", "Eat fruit"],
         ["C", "Count fruit in bowl"],
-        ["Q", "Quit"]
+        ["S", "Stop program"]
         ]
     #add_new_entry(fruit_list)
 
@@ -98,10 +129,10 @@ def main():
         elif user_choice == "A":
             run_program ==(add_fruit(fruit_list))
         elif user_choice == "E":
-            run_program == (eat_fruit(fruit_list))
+            run_program == (remove_fruit(fruit_list))
         elif user_choice == "C":
             run_program == (count_fruit(fruit_list))
-        elif user_choice == "Q":
+        elif user_choice == "S":
             run_program = False
         else:
             print("Unrecognised entry")
